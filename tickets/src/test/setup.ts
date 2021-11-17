@@ -21,6 +21,12 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+	// process.env.JWT_KEY = 'asdf';
+
+	// mongo = await MongoMemoryServer.create();
+	// const mongoUri = mongo.getUri();
+
+	// await mongoose.connect(mongoUri);
 	const collections = await mongoose.connection.db.collections();
 	for (let collection of collections) {
 		await collection.deleteMany({});
@@ -35,7 +41,7 @@ afterAll(async () => {
 global.signIn = () => {
 	const token = jwt.sign(
 		{
-			id: '23kn12jn',
+			id: new mongoose.Types.ObjectId().toHexString(),
 			email: 'test@test.com',
 		},
 		process.env.JWT_KEY!
