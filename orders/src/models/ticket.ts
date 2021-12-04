@@ -9,7 +9,7 @@ interface TicketAttrs {
 export interface TicketDoc extends mongoose.Document {
 	title: string;
 	price: number;
-	isReserved(): Promise<boolean>;
+	isReserved(): Promise<boolean>; // Why is this in TicketDoc?
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
