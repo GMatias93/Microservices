@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
 import { Order } from '../../models/order';
@@ -5,6 +6,7 @@ import { Ticket } from '../../models/ticket';
 
 const buildTicket = async () => {
 	const ticket = Ticket.build({
+		id: new mongoose.Types.ObjectId().toHexString(),
 		title: 'concert',
 		price: 20,
 	});
@@ -14,9 +16,9 @@ const buildTicket = async () => {
 
 it('fetches orders for a particular user', async () => {
 	// Create three tickets
-	const ticketOne = await buildTicket(); // global.createTicket();
-	const ticketTwo = await buildTicket(); // global.createTicket();
-	const ticketThree = await buildTicket(); // global.createTicket();
+	const ticketOne = await buildTicket();
+	const ticketTwo = await buildTicket();
+	const ticketThree = await buildTicket();
 
 	const userOne = global.signIn();
 	const userTwo = global.signIn();
