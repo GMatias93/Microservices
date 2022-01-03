@@ -1,25 +1,28 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
 import request from 'supertest';
+import jwt from 'jsonwebtoken';
 import { app } from '../app';
 
 declare global {
-	var signIn: (id?: string) => string[];
+	var signIn: () => string[];
 }
+
+jest.mock('../nats-wrapper');
 
 let mongo: any;
 beforeAll(async () => {
-	process.env.JWT_KEY = 'asdfasdf';
+	process.env.JWT_KEY = 'asdf';
 	process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-	mongo = new MongoMemoryServer();
-	const mongoUri = await mongo.getUri();
+	mongo = await MongoMemoryServer.create();
+	const mongoUri = mongo.getUri();
 
 	await mongoose.connect(mongoUri);
 });
 
 beforeEach(async () => {
+	jest.clearAllMocks();
 	const collections = await mongoose.connection.db.collections();
 
 	for (let collection of collections) {
@@ -32,10 +35,10 @@ afterAll(async () => {
 	await mongoose.connection.close();
 });
 
-global.signIn = (id?: string) => {
+global.signIn = () => {
 	// Build a JWT payload.  { id, email }
 	const payload = {
-		id: id || new mongoose.Types.ObjectId().toHexString(),
+		id: new mongoose.Types.ObjectId().toHexString(),
 		email: 'test@test.com',
 	};
 
