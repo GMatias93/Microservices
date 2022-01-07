@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: orders
-          image: us.gcr.io/elaborate-night-329914/orders
+          image: gabe93/orders
           env:
             - name: NATS_CLIENT_ID
               valueFrom:

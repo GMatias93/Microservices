@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: payments
-          image: us.gcr.io/elaborate-night-329914/payments
+          image: gabe93/payments
           env:
             - name: NATS_CLIENT_ID
               valueFrom:
