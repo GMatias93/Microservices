@@ -9,7 +9,7 @@ build:
   googleCloudBuild:
     projectId: elaborate-night-329914
   artifacts:
-    - image: us.gcr.io/elaborate-night-329914/auth
+    - image: gabe93/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -17,7 +17,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/elaborate-night-329914/client
+    - image: gabe93/client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -25,7 +25,7 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: us.gcr.io/elaborate-night-329914/tickets
+    - image: gabe93/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -33,7 +33,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/elaborate-night-329914/orders
+    - image: gabe93/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -41,7 +41,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/elaborate-night-329914/expiration
+    - image: gabe93/expiration
       context: expiration
       docker:
         dockerfile: Dockerfile
@@ -49,7 +49,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/elaborate-night-329914/payments
+    - image: gabe93/payments
       context: payments
       docker:
         dockerfile: Dockerfile
